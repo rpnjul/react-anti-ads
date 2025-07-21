@@ -1,6 +1,6 @@
 {
   "name": "react-anti-ads",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component and hook to detect AdBlock",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -20,6 +20,14 @@
   ],
   "author": "Satria Aprilian",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rpnjul/react-anti-ads.git"
+  },
+  "homepage": "https://github.com/rpnjul/react-anti-ads#readme",
+  "bugs": {
+    "url": "https://github.com/rpnjul/react-anti-ads/issues"
+  },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
