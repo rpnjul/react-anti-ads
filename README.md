@@ -60,7 +60,7 @@ function App() {
 ```
 ## 🧠 How It Works
 Internally, this package uses:
-- A hidden <div> bait with class names like adsbox, banner-ad, etc.
+- A hidden ```<div>``` bait with class names like adsbox, banner-ad, etc.
 - A fake script request to /ads.js that usually gets blocked
 - Regular polling every 1s to re-check dynamically
 - Returns a fallback UI immediately when AdBlock is detected
@@ -75,4 +75,5 @@ Internally, this package uses:
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-
+[![npm version](https://img.shields.io/npm/v/react-anti-ads.svg)](https://www.npmjs.com/package/react-anti-ads)
+[![downloads](https://img.shields.io/npm/dm/react-anti-ads.svg)](https://www.npmjs.com/package/react-anti-ads)
