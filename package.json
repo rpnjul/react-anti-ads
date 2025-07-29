@@ -1,6 +1,6 @@
 {
   "name": "react-anti-ads",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React component and hook to detect AdBlock",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
