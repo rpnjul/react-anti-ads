@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const useAdBlock = () => {
-    const [isChecking, setIsChecking] = useState(true);
-    const [isAdBlockActive, setIsAdBlockActive] = useState(false);
-    const detect = () => {
-        let scriptBlocked = false;
+const detectAdBlock = () => {
+    return new Promise((resolve) => {
         const bait = document.createElement("div");
         bait.className =
             "adsbox ad ads banner banner-ad ad-placement ad-banner ad-native";
@@ -13,24 +10,37 @@ const useAdBlock = () => {
         bait.style.width = "1px";
         bait.style.top = "-10000px";
         document.body.appendChild(bait);
-        const inlineScript = document.createElement("script");
-        inlineScript.appendChild(document.createTextNode("void 0;"));
-        document.body.appendChild(inlineScript);
+        const testScript = document.createElement("script");
+        try {
+            testScript.appendChild(document.createTextNode(`void 0;`));
+        }
+        catch {
+            testScript.text = `void 0;`;
+        }
+        document.body.appendChild(testScript);
         setTimeout(() => {
             const baitBlocked = !bait ||
                 bait.offsetHeight === 0 ||
                 bait.clientHeight === 0 ||
                 window.getComputedStyle(bait).display === "none";
-            const isBlocked = baitBlocked || scriptBlocked;
             bait.remove();
-            inlineScript.remove();
-            setIsAdBlockActive(isBlocked);
-            setIsChecking(false);
-        }, 500);
+            testScript.remove();
+            resolve(baitBlocked);
+        }, 100);
+    });
+};
+
+const useAdBlock = () => {
+    const [isChecking, setIsChecking] = useState(true);
+    const [isAdBlockActive, setIsAdBlockActive] = useState(false);
+    const runDetection = async () => {
+        const result = await detectAdBlock();
+        setIsAdBlockActive(result);
+        setIsChecking(false);
     };
     useEffect(() => {
-        detect();
-        const interval = setInterval(detect, 1000);
+        runDetection();
+        const interval = setInterval(runDetection, 1000);
         return () => clearInterval(interval);
     }, []);
     return { isAdBlockActive, isChecking };
