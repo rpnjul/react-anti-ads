@@ -45,6 +45,7 @@ export default function Page() {
   );
 }
 ```
+
 In React
 ```tsx
 import React from "react";
@@ -58,17 +59,47 @@ function App() {
   );
 }
 ```
+
+⚡ Imperative Usage with isAdBlockOn()
+
+```tsx
+import { useEffect } from "react";
+import { isAdBlockOn } from "react-anti-ads";
+
+export default function MyComponent() {
+  useEffect(() => {
+    isAdBlockOn().then((detected) => {
+      if (detected) {
+        console.log("AdBlock is active!");
+        // You can show a modal, redirect, etc.
+      }
+    });
+  }, []);
+
+  return <div>My page content</div>;
+}
+```
+
 ## 🧠 How It Works
 Internally, this package uses:
 - A hidden ```<div>``` bait with class names like adsbox, banner-ad, etc.
 - A fake script request to /ads.js that usually gets blocked
 - Regular polling every 1s to re-check dynamically
 - Returns a fallback UI immediately when AdBlock is detected
-- No actual network is required. The /ads.js file does not need to exist.
+- No actual network is required.
+
+## 📚 API Reference
+
+API | Type | Description |
+--- | --- | --- |
+AntiAds | Component | Wrap your UI and show fallback if blocked |
+useAdBlock() | Hook | Returns { isAdBlockActive, isChecking } |
+isAdBlockOn() | Function | Returns Promise<boolean> for detection |
+
+
 ## Authors
 
 - [Satria Aprilian](https://www.github.com/rpnjul)
-
 
 ## 📝 License
 
